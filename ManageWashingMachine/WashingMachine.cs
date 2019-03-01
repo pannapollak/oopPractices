@@ -13,6 +13,7 @@ namespace ManageWashingMachine
 
         public bool CheckColor()
         {
+
             return true;
         }
 
@@ -24,19 +25,32 @@ namespace ManageWashingMachine
         {
             WashingMachine wash = new WashingMachine();
             wash.Build();
-            wash.Run();
+            wash.Run("Dark");
         }
 
         private void Build()
         {
             Clothes = new List<PieceOfClothing>
             {
-            }
+                new Trouser("light", 500),
+                new Jumper("dark", 300),
+                new TShirt("white", 150),
+                new TShirt("red", 100),
+                new Trouser("dark", 500),
+                new Jumper("dark", 400)
+            };
         }
 
-        private void Run()
+        private void Run(string color)
         {
-            throw new NotImplementedException();
+            foreach (var cloth in Clothes)
+            {
+                if (cloth.Color == color)
+                {
+                    if (CheckColor()) CheckWeight();
+                }
+                 
+            }
         }
     }
 }
