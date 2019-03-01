@@ -8,48 +8,61 @@ namespace ManageWashingMachine
 {
     class WashingMachine
     {
+        
         public List<PieceOfClothing> Clothes { get; set; }
         public List<PieceOfClothing> CurrentLoad { get; set; }
 
-        public bool CheckColor()
+        public void CheckWeight(PieceOfClothing cloth, int weightCounter)
         {
-
-            return true;
-        }
-
-        public void CheckWeight()
-        {
+            if (cloth.Weight + weightCounter <= 5000)
+            {
+                CurrentLoad.Add(cloth);
+            }
         }
 
         static void Main(string[] args)
         {
             WashingMachine wash = new WashingMachine();
             wash.Build();
-            wash.Run("Dark");
+            wash.Run("dark");
+            wash.PrintResult();
         }
+
 
         private void Build()
         {
             Clothes = new List<PieceOfClothing>
             {
-                new Trouser("light", 500),
-                new Jumper("dark", 300),
-                new TShirt("white", 150),
-                new TShirt("red", 100),
-                new Trouser("dark", 500),
-                new Jumper("dark", 400)
+                new PieceOfClothing("Jumper", "light", 500),
+                new PieceOfClothing("Jumper", "dark", 300),
+                new PieceOfClothing("Leggings", "white", 150),
+                new PieceOfClothing("T-shirt", "red", 100),
+                new PieceOfClothing("Jeans", "dark", 500),
+                new PieceOfClothing("Trousers", "dark", 400)
             };
+
+            CurrentLoad = new List<PieceOfClothing>();
+
         }
 
-        private void Run(string color)
+        private void Run(string currentColor)
         {
+            int weightCounter = 0;
             foreach (var cloth in Clothes)
             {
-                if (cloth.Color == color)
+                if (cloth.Color == currentColor && weightCounter < 5000)
                 {
-                    if (CheckColor()) CheckWeight();
+                    CheckWeight(cloth, weightCounter);
                 }
                  
+            }
+        }
+
+        private void PrintResult()
+        {
+            foreach (var gettingCleanPieceOfClothing in CurrentLoad)
+            {
+                Console.WriteLine(gettingCleanPieceOfClothing);
             }
         }
     }
