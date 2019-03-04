@@ -9,6 +9,7 @@ namespace ManageWashingMachine
     class WashingMachine
     {
         public int WeightCounter = 0;
+        public int? loadsImplemented;
         public List<PieceOfClothing> Clothes { get; set; }
         public List<PieceOfClothing> CurrentLoad { get; set; }
 
@@ -70,6 +71,8 @@ namespace ManageWashingMachine
                 {
                     Console.WriteLine(gettingCleanPieceOfClothing);
                 }
+                loadsImplemented = 1;
+                Console.WriteLine($"loads implemented {loadsImplemented}");
             }
             else
             {
